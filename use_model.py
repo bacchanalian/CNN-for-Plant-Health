@@ -63,7 +63,7 @@ from matplotlib import pyplot as plt
 
 image_datagen = ImageDataGenerator(rescale=1./255)
 image_generator = image_datagen.flow_from_directory(
-        'data/object3',
+        'data/detect',
         target_size=(150, 150),
         batch_size=batch_size,
         shuffle = False,
@@ -71,34 +71,6 @@ image_generator = image_datagen.flow_from_directory(
 
 image_generator.reset()
 im_pred = loaded_model.predict_generator(image_generator, steps=np.ceil(image_generator.samples/batch_size), verbose = 1, workers=1)
-
-
-# Test code
-#i0 = image.load_img('data/object3/x/rp0.jpg')
-#i1 = image.load_img('data/object3/x/rp1.jpg')
-#i2 = image.load_img('data/object3/x/rp2.jpg')
-#i3 = image.load_img('data/object3/x/rp3.jpg')
-#i4 = image.load_img('data/object3/x/rp4.jpg')
-#i5 = image.load_img('data/object3/x/rp5.jpg')
-#i6 = image.load_img('data/object3/x/rp6.jpg')
-#c14 = image.load_img('data/object3/x/c14.jpg')
-#
-#img = c14
-#img_t = image.img_to_array(img)
-#img_t = np.expand_dims(img_t, axis=0)
-#img_t /= 255.
-##pred = loaded_model.predict(img_t, 1);
-#pred = np.vstack([pred, loaded_model.predict(img_t, 1)])
-
-
-# Region Proposal
-#im = i1
-#M = im.shape[0]//2
-#N = im.shape[1]//2
-#img_array = [im[x:x+M,y:y+N] for x in range(0,im.shape[0],M) for y in range(0,im.shape[1],N)]
-# change region proposal
-# use 2 disease, 2 non disease and 1 empty space
-# note that it lacks robustness because of there is no negative training for objects that are not leaves
 
 
 
